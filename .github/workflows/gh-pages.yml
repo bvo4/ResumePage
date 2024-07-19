@@ -15,15 +15,12 @@ jobs:
       with:
         dotnet-version: 8.x
         
-    # Install dotnet wasm buildtools workload
-    - name: Install .NET WASM Build Tools
-      run: dotnet workload install wasm-tools
-        
     - name: Add .NuGets
       run: dotnet nuget add source --username bvo4 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/bvo4/index.json"
       
     - name: dotnet workload restore
       run: dotnet workload restore
+      
     - name: Publish with dotnet
       run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
 
@@ -38,7 +35,6 @@ jobs:
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
-      
       
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
