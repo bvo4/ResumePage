@@ -24,9 +24,6 @@ jobs:
     - name: Publish with dotnet
       run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
       
-    # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
-    - name: Create .nojekyll file 📁
-      run: touch /wwwroot/.nojekyll
       
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
