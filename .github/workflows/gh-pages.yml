@@ -14,7 +14,7 @@ jobs:
       with:
         dotnet-version: 8.x
     - name: Publish with dotnet
-      run: dotnet publish Shared.csproj -c Release -o release --nologo
+      run: dotnet publish ResumePage.csproj -c Release -o release --nologo
     - name: dotnet workload restore
       run: dotnet workload restore
     - name: Deploy to Github Pages
