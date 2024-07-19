@@ -14,10 +14,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 8.x
-        
-    # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
-    - name: Create .nojekyll file 📁
-      run: touch src/Client/wwwroot/.nojekyll
+
     
     - name: Add .NuGets
       run: dotnet nuget add source --username bvo4 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/bvo4/index.json"
@@ -26,6 +23,15 @@ jobs:
       run: dotnet workload restore
     - name: Publish with dotnet
       run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
+      
+    # Copy index.html to 404.html to serve the same file when a file is not found
+    - name: Copy index.html to 404.html
+      run: cp dist/Web/wwwroot/index.html dist/Web/wwwroot/404.html
+        
+    # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+    - name: Create .nojekyll file 📁
+      run: touch dist/wwwroot/.nojekyll
+      
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
