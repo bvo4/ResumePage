@@ -12,9 +12,11 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
+        dotnet-version: 8.x
     - name: Publish with dotnet
-      run: dotnet publish --configuration Release --output build
+      run: dotnet publish BlazorPages/ResumePage.csproj -c Release -o release --nologo
+    - name: dotnet workload restore
+      run: dotnet workload restore
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
