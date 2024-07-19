@@ -18,10 +18,10 @@ jobs:
     - name: Add .NuGets
       run: dotnet nuget add source --username bvo4 --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/bvo4/index.json"
       
-    - name: Publish with dotnet
-      run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
     - name: dotnet workload restore
       run: dotnet workload restore
+    - name: Publish with dotnet
+      run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
