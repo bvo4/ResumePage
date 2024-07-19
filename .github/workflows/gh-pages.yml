@@ -26,7 +26,7 @@ jobs:
       
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Create .nojekyll file 📁
-      run: touch dist/wwwroot/.nojekyll
+      run: touch /wwwroot/.nojekyll
       
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
